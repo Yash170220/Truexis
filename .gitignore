@@ -1,0 +1,24 @@
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+myenv/
+.venv/
+.env
+.env.*
+!.env.example
+.model_cache/
+
+node_modules/
+.next/
+dist/
+build/
+coverage/
+tsconfig.tsbuildinfo
+.env.local
+
+*.log

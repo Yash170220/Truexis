@@ -1,0 +1,620 @@
+{
+  "cement_industry": {
+    "emission_intensity": {
+      "rule_name": "cement_emission_range",
+      "description": "Cement production emissions typically 800-1,100 kg CO\u2082/tonne clinker",
+      "indicator": "Scope 1 GHG Emissions Intensity",
+      "severity": "error",
+      "validation_type": "range",
+      "parameters": {
+        "min": 800,
+        "max": 1100,
+        "unit": "kg CO\u2082/tonne"
+      },
+      "citation": "Andrew (2019) - Global CO\u2082 emissions from cement production",
+      "error_message": "Cement emissions outside typical range. Possible unit error or data entry mistake.",
+      "suggested_fixes": [
+        "Check if value should be in tonnes instead of kg (divide by 1000)",
+        "Verify clinker ratio is calculated correctly",
+        "Review fuel mix and process efficiency data"
+      ]
+    },
+    "energy_intensity": {
+      "rule_name": "cement_energy_range",
+      "description": "Thermal and electrical energy consumption for cement production",
+      "indicator": "Total Electricity Consumption Intensity",
+      "validation_type": "range",
+      "parameters": {
+        "min": 2.9,
+        "max": 4.5,
+        "unit": "GJ/tonne clinker"
+      },
+      "severity": "warning",
+      "citation": "IEA Technology Roadmap - Low-Carbon Transition in the Cement Industry",
+      "error_message": "Energy intensity outside typical range for cement production.",
+      "suggested_fixes": [
+        "Verify thermal and electrical energy are both included",
+        "Check if pre-heating and grinding energy is accounted for",
+        "Review kiln efficiency metrics"
+      ]
+    },
+    "clinker_ratio": {
+      "rule_name": "cement_clinker_ratio",
+      "description": "Clinker to cement ratio for blended cement",
+      "indicator": "Clinker content in cement",
+      "validation_type": "range",
+      "parameters": {
+        "min": 0.65,
+        "max": 0.95,
+        "unit": "ratio"
+      },
+      "severity": "warning",
+      "citation": "GCCA - Getting the Numbers Right (GNR) Database",
+      "error_message": "Clinker ratio outside typical range for modern cement production.",
+      "suggested_fixes": [
+        "Verify supplementary cementitious materials (SCMs) usage",
+        "Check regional cement standards and blending practices"
+      ]
+    }
+  },
+  "steel_industry": {
+    "bf_bof_emissions": {
+      "rule_name": "steel_bf_bof_range",
+      "description": "Blast furnace + basic oxygen furnace route emissions",
+      "indicator": "Scope 1 GHG Emissions Intensity",
+      "validation_type": "range",
+      "parameters": {
+        "min": 1800,
+        "max": 2500,
+        "unit": "kg CO\u2082/tonne crude steel"
+      },
+      "severity": "error",
+      "citation": "Bataille et al. (2021) - A review of technology and policy deep decarbonization pathway options for making energy-intensive industry production consistent with the Paris Agreement",
+      "error_message": "BF-BOF steel emissions outside expected range.",
+      "suggested_fixes": [
+        "Verify production route is actually BF-BOF (not EAF)",
+        "Check for unit conversion errors",
+        "Review coal and coke consumption data"
+      ]
+    },
+    "eaf_emissions": {
+      "rule_name": "steel_eaf_range",
+      "description": "Electric arc furnace route using scrap steel",
+      "indicator": "Scope 1 GHG Emissions Intensity",
+      "validation_type": "range",
+      "parameters": {
+        "min": 400,
+        "max": 600,
+        "unit": "kg CO\u2082/tonne crude steel"
+      },
+      "severity": "error",
+      "citation": "Bataille et al. (2021) - IEA Steel Technology Roadmap",
+      "error_message": "EAF steel emissions outside expected range.",
+      "suggested_fixes": [
+        "Verify production route is EAF",
+        "Check scrap quality and supplementary fuel usage",
+        "Review electricity grid emission factor if including Scope 2"
+      ]
+    },
+    "energy_consumption": {
+      "rule_name": "steel_energy_intensity",
+      "description": "Total energy consumption for steel production",
+      "indicator": "Total Electricity Consumption Intensity",
+      "validation_type": "range",
+      "parameters": {
+        "min": 18,
+        "max": 25,
+        "unit": "GJ/tonne crude steel"
+      },
+      "severity": "warning",
+      "citation": "World Steel Association - Energy Use in the Steel Industry",
+      "error_message": "Steel energy intensity outside typical range.",
+      "suggested_fixes": [
+        "Check if both thermal and electrical energy are included",
+        "Verify production route and technology vintage"
+      ]
+    }
+  },
+  "automotive_industry": {
+    "vehicle_emissions": {
+      "rule_name": "automotive_manufacturing_emissions",
+      "description": "Manufacturing emissions per vehicle produced",
+      "indicator": "Scope 1 and 2 GHG Emissions per vehicle",
+      "validation_type": "range",
+      "parameters": {
+        "min": 4,
+        "max": 12,
+        "unit": "tonnes CO\u2082e/vehicle"
+      },
+      "severity": "warning",
+      "citation": "ICCT (2020) - Life Cycle Assessment of Automotive Manufacturing",
+      "error_message": "Manufacturing emissions per vehicle outside expected range.",
+      "suggested_fixes": [
+        "Verify vehicle type (passenger vs. commercial)",
+        "Check if supply chain emissions are excluded (should only be direct manufacturing)",
+        "Review allocation methodology for multi-product facilities"
+      ]
+    },
+    "paint_shop_voc": {
+      "rule_name": "automotive_voc_emissions",
+      "description": "Volatile organic compound emissions from paint operations",
+      "indicator": "VOC emissions per vehicle",
+      "validation_type": "range",
+      "parameters": {
+        "min": 10,
+        "max": 35,
+        "unit": "kg VOC/vehicle"
+      },
+      "severity": "warning",
+      "citation": "EPA - Automotive Manufacturing Industry Standards",
+      "error_message": "VOC emissions outside typical range for automotive paint shops.",
+      "suggested_fixes": [
+        "Verify paint technology (solvent-based vs. water-based)",
+        "Check capture and abatement system efficiency"
+      ]
+    },
+    "water_consumption": {
+      "rule_name": "automotive_water_intensity",
+      "description": "Water consumption in automotive manufacturing",
+      "indicator": "Total Water Consumption Intensity",
+      "validation_type": "range",
+      "parameters": {
+        "min": 3,
+        "max": 8,
+        "unit": "m\u00b3/vehicle"
+      },
+      "severity": "warning",
+      "citation": "World Business Council for Sustainable Development - Water in Manufacturing",
+      "error_message": "Water consumption outside typical range.",
+      "suggested_fixes": [
+        "Check if water recycling systems are operational",
+        "Verify measurement includes all manufacturing processes"
+      ]
+    }
+  },
+  "cross_industry": {
+    "scope_classification": {
+      "rule_name": "scope_1_sources",
+      "description": "Validate Scope 1 emission sources against GHG Protocol categories",
+      "indicator": "Scope 1 emission source category",
+      "validation_type": "category_check",
+      "parameters": {
+        "allowed_sources": [
+          "stationary combustion",
+          "mobile combustion",
+          "process emissions",
+          "fugitive emissions"
+        ]
+      },
+      "severity": "error",
+      "citation": "GHG Protocol Corporate Accounting and Reporting Standard",
+      "error_message": "Source not valid for Scope 1. Check GHG Protocol guidelines.",
+      "suggested_fixes": [
+        "Verify emission source categorization",
+        "Review GHG Protocol guidance on scope boundaries",
+        "Check if source should be classified as Scope 2 or 3"
+      ]
+    },
+    "temporal_consistency": {
+      "rule_name": "monthly_sum_equals_annual",
+      "description": "Verify monthly data aggregates to annual totals",
+      "indicator": "Temporal data consistency",
+      "validation_type": "sum_check",
+      "parameters": {
+        "tolerance": 0.02
+      },
+      "severity": "warning",
+      "citation": "Data Quality Management Best Practices",
+      "error_message": "Sum of monthly values does not match annual total within 2% tolerance.",
+      "suggested_fixes": [
+        "Check for missing months in data",
+        "Verify rounding and decimal precision",
+        "Review data collection and aggregation process"
+      ]
+    },
+    "decimal_magnitude": {
+      "rule_name": "detect_decimal_errors",
+      "description": "Statistical outlier detection for decimal place errors",
+      "indicator": "Statistical outlier detection",
+      "validation_type": "outlier",
+      "parameters": {
+        "z_score_threshold": 3.0
+      },
+      "severity": "error",
+      "citation": "Statistical Process Control Methods",
+      "error_message": "Value is statistical outlier. Check for decimal place errors (e.g., 15000 vs 1500.0).",
+      "suggested_fixes": [
+        "Verify decimal placement in original data",
+        "Check unit conversions were applied correctly",
+        "Review data entry process for systematic errors"
+      ]
+    },
+    "unit_consistency": {
+      "rule_name": "unit_format_validation",
+      "description": "Validate unit notation follows standard conventions",
+      "indicator": "Unit notation consistency",
+      "validation_type": "pattern_match",
+      "parameters": {
+        "allowed_patterns": [
+          "kg CO\u2082",
+          "kg CO\u2082e",
+          "tonnes CO\u2082",
+          "tonnes CO\u2082e",
+          "GJ",
+          "MWh",
+          "m\u00b3",
+          "L"
+        ]
+      },
+      "severity": "warning",
+      "citation": "SI Units and GHG Protocol Standards",
+      "error_message": "Unit notation does not follow standard conventions.",
+      "suggested_fixes": [
+        "Standardize unit notation across all data",
+        "Use CO\u2082e for aggregated GHG emissions",
+        "Apply consistent SI prefixes (kg, tonnes, not tons)"
+      ]
+    },
+    "negative_values": {
+      "rule_name": "no_negative_emissions",
+      "description": "Emissions and resource consumption cannot be negative",
+      "indicator": "Value sign validation",
+      "validation_type": "range",
+      "parameters": {
+        "min": 0,
+        "max": null,
+        "unit": "any"
+      },
+      "severity": "error",
+      "citation": "Fundamental Data Validation Principles",
+      "error_message": "Negative values detected for emissions or resource consumption.",
+      "suggested_fixes": [
+        "Check for data entry errors or incorrect signs",
+        "Verify calculation formulas",
+        "Review if negative represents a credit or offset (should be recorded separately)"
+      ]
+    },
+    "biogenic_carbon": {
+      "rule_name": "biogenic_co2_reporting",
+      "description": "Biogenic CO\u2082 should be reported separately from fossil CO\u2082",
+      "indicator": "Biogenic carbon accounting",
+      "validation_type": "category_check",
+      "parameters": {
+        "requires_separate_reporting": true,
+        "allowed_in_scope_totals": false
+      },
+      "severity": "warning",
+      "citation": "GHG Protocol - Treatment of Biogenic Carbon",
+      "error_message": "Biogenic CO\u2082 may be improperly included in Scope totals.",
+      "suggested_fixes": [
+        "Report biogenic CO\u2082 separately from fossil emissions",
+        "Verify biomass fuel sources and carbon neutrality claims",
+        "Document biogenic accounting methodology"
+      ]
+    },
+    "facility_boundary": {
+      "rule_name": "operational_control_boundary",
+      "description": "Emissions reported under operational control approach",
+      "indicator": "Consolidation approach consistency",
+      "validation_type": "category_check",
+      "parameters": {
+        "consolidation_approach": "operational_control",
+        "requires_documentation": true
+      },
+      "severity": "error",
+      "citation": "GHG Protocol - Corporate Standard Chapter 3",
+      "error_message": "Facility boundary and consolidation approach unclear or inconsistent.",
+      "suggested_fixes": [
+        "Document organizational boundary approach",
+        "Verify operational control criteria",
+        "Check for double-counting across facilities"
+      ]
+    },
+    "emission_factor_vintage": {
+      "rule_name": "emission_factor_currency",
+      "description": "Emission factors should be current within 3 years",
+      "indicator": "Emission factor data currency",
+      "validation_type": "date_check",
+      "parameters": {
+        "max_age_years": 3,
+        "preferred_sources": [
+          "IPCC",
+          "EPA",
+          "DEFRA",
+          "National Inventory Reports"
+        ]
+      },
+      "severity": "warning",
+      "citation": "GHG Protocol - Data Quality Guidance",
+      "error_message": "Emission factors may be outdated (>3 years old).",
+      "suggested_fixes": [
+        "Update to latest emission factors from authoritative sources",
+        "Document emission factor sources and vintage",
+        "Justify use of older factors if necessary"
+      ]
+    }
+  },
+  "energy_utilities": {
+    "electricity_grid_intensity": {
+      "rule_name": "grid_emission_factor_range",
+      "description": "Grid emission factors vary by region and energy mix",
+      "indicator": "Electricity grid emission factor",
+      "validation_type": "range",
+      "parameters": {
+        "min": 0.1,
+        "max": 1.2,
+        "unit": "kg CO\u2082e/kWh"
+      },
+      "severity": "warning",
+      "citation": "IEA - World Energy Outlook, Regional Grid Factors",
+      "error_message": "Grid emission factor outside global range.",
+      "suggested_fixes": [
+        "Verify regional grid emission factor source",
+        "Check for renewable energy specific factors",
+        "Use location-based vs. market-based methodology consistently"
+      ]
+    },
+    "renewable_energy_percentage": {
+      "rule_name": "renewable_percentage_validation",
+      "description": "Renewable energy as percentage of total consumption",
+      "indicator": "Renewable energy percentage",
+      "validation_type": "range",
+      "parameters": {
+        "min": 0,
+        "max": 100,
+        "unit": "percentage"
+      },
+      "severity": "error",
+      "citation": "RE100 and CDP Renewable Energy Guidance",
+      "error_message": "Renewable energy percentage must be between 0-100%.",
+      "suggested_fixes": [
+        "Check calculation methodology",
+        "Verify renewable energy certificates (RECs) are valid",
+        "Ensure no double-counting between grid and on-site renewables"
+      ]
+    }
+  },
+  "data_quality": {
+    "completeness_check": {
+      "rule_name": "mandatory_fields_present",
+      "description": "Critical data fields must not be null or empty",
+      "indicator": "Data completeness",
+      "validation_type": "null_check",
+      "parameters": {
+        "required_fields": [
+          "facility_id",
+          "reporting_period",
+          "emission_value",
+          "emission_unit",
+          "scope"
+        ]
+      },
+      "severity": "error",
+      "citation": "Data Governance Standards",
+      "error_message": "Required fields are missing or empty.",
+      "suggested_fixes": [
+        "Complete all mandatory data fields",
+        "Use 'not applicable' or 'not available' codes where appropriate",
+        "Document reasons for missing data"
+      ]
+    },
+    "precision_reasonability": {
+      "rule_name": "excessive_precision_check",
+      "description": "Decimal precision should match measurement accuracy",
+      "indicator": "Data precision validation",
+      "validation_type": "precision_check",
+      "parameters": {
+        "max_decimal_places": 2,
+        "applies_to_units": [
+          "tonnes CO\u2082e",
+          "MWh",
+          "m\u00b3"
+        ]
+      },
+      "severity": "warning",
+      "citation": "Measurement Uncertainty Principles",
+      "error_message": "Excessive decimal precision may indicate calculation artifacts rather than actual measurement precision.",
+      "suggested_fixes": [
+        "Round values to appropriate significant figures",
+        "Match precision to measurement instrument accuracy",
+        "Document measurement uncertainty"
+      ]
+    }
+  },
+  "cross_field": {
+    "scope_totals_consistency": {
+      "rule_name": "scope_totals_consistency",
+      "description": "Scope 1 + Scope 2 + Scope 3 should equal total emissions within tolerance",
+      "indicator": "Scope totals validation",
+      "validation_type": "cross_field",
+      "parameters": {
+        "fields": [
+          "scope_1",
+          "scope_2",
+          "scope_3",
+          "total_emissions"
+        ],
+        "relationship": "sum",
+        "tolerance": 0.02
+      },
+      "severity": "error",
+      "citation": "GHG Protocol - Corporate Accounting and Reporting Standard",
+      "error_message": "Sum of individual scopes does not match reported total emissions.",
+      "suggested_fixes": [
+        "Verify all scope emissions are included in total",
+        "Check for double-counting across scopes",
+        "Review calculation methodology for total emissions",
+        "Ensure consistent reporting boundaries"
+      ]
+    },
+    "scope_subset_relationship": {
+      "rule_name": "scope_subset_relationship",
+      "description": "Individual scopes must not exceed total emissions",
+      "indicator": "Scope relationship validation",
+      "validation_type": "cross_field",
+      "parameters": {
+        "fields": [
+          "scope_1",
+          "scope_2",
+          "total_emissions"
+        ],
+        "relationship": "subset",
+        "tolerance": 0.0
+      },
+      "severity": "error",
+      "citation": "GHG Protocol - Scope Definitions",
+      "error_message": "Individual scope emissions exceed total emissions.",
+      "suggested_fixes": [
+        "Review scope boundary definitions",
+        "Check for unit conversion errors between scope and total",
+        "Verify total emissions includes all reported scopes",
+        "Ensure no biogenic emissions are incorrectly included"
+      ]
+    },
+    "energy_balance": {
+      "rule_name": "energy_balance_validation",
+      "description": "Sum of energy sources should equal total energy consumption",
+      "indicator": "Energy balance validation",
+      "validation_type": "cross_field",
+      "parameters": {
+        "fields": [
+          "electricity",
+          "natural_gas",
+          "fuel_oil",
+          "steam",
+          "total_energy"
+        ],
+        "relationship": "sum",
+        "tolerance": 0.05
+      },
+      "severity": "warning",
+      "citation": "ISO 50001 - Energy Management Systems",
+      "error_message": "Energy sources do not sum to total energy consumption within tolerance.",
+      "suggested_fixes": [
+        "Verify all energy sources are included",
+        "Check unit conversions (MWh, GJ, therms)",
+        "Account for energy conversion losses",
+        "Include renewable energy sources if applicable",
+        "Review metering and measurement accuracy"
+      ]
+    },
+    "production_energy_correlation": {
+      "rule_name": "production_energy_correlation",
+      "description": "Energy consumption should correlate reasonably with production volume",
+      "indicator": "Production-energy correlation",
+      "validation_type": "cross_field",
+      "parameters": {
+        "fields": [
+          "energy_consumption",
+          "production_volume"
+        ],
+        "relationship": "correlation",
+        "intensity_range": {
+          "min": 0.5,
+          "max": 50
+        }
+      },
+      "severity": "warning",
+      "citation": "Industrial Energy Efficiency Best Practices",
+      "error_message": "Energy intensity (energy/production) is outside typical range.",
+      "suggested_fixes": [
+        "Verify production volume units are correct",
+        "Check if all energy sources are included",
+        "Review for seasonal variations or shutdowns",
+        "Confirm energy and production reporting periods match"
+      ]
+    },
+    "production_emission_correlation": {
+      "rule_name": "production_emission_correlation",
+      "description": "Emissions should correlate with production volume",
+      "indicator": "Production-emission correlation",
+      "validation_type": "cross_field",
+      "parameters": {
+        "fields": [
+          "emissions",
+          "production_volume"
+        ],
+        "relationship": "correlation",
+        "anomaly_threshold": 3.0
+      },
+      "severity": "error",
+      "citation": "GHG Protocol - Intensity Metrics",
+      "error_message": "Emission intensity is anomalous - high energy but low emissions or vice versa.",
+      "suggested_fixes": [
+        "Verify emission factors are correctly applied",
+        "Check for missing emission sources",
+        "Review renewable energy usage impact",
+        "Confirm production volume and emissions reporting alignment"
+      ]
+    },
+    "waste_material_balance": {
+      "rule_name": "waste_material_balance",
+      "description": "Waste generated should not exceed raw materials consumed",
+      "indicator": "Material balance validation",
+      "validation_type": "cross_field",
+      "parameters": {
+        "fields": [
+          "waste_generated",
+          "raw_materials_consumed"
+        ],
+        "relationship": "subset",
+        "tolerance": 0.1
+      },
+      "severity": "warning",
+      "citation": "Circular Economy Principles and Material Flow Analysis",
+      "error_message": "Waste generated exceeds raw materials consumed.",
+      "suggested_fixes": [
+        "Verify waste measurement methodology",
+        "Check if all raw materials are accounted for",
+        "Review for waste from previous periods",
+        "Confirm units are consistent between waste and materials"
+      ]
+    },
+    "water_withdrawal_discharge": {
+      "rule_name": "water_withdrawal_discharge_balance",
+      "description": "Water discharged should not exceed water withdrawn",
+      "indicator": "Water balance validation",
+      "validation_type": "cross_field",
+      "parameters": {
+        "fields": [
+          "water_discharge",
+          "water_withdrawal"
+        ],
+        "relationship": "subset",
+        "tolerance": 0.0
+      },
+      "severity": "error",
+      "citation": "CDP Water Security Questionnaire",
+      "error_message": "Water discharge exceeds water withdrawal.",
+      "suggested_fixes": [
+        "Verify water metering accuracy",
+        "Account for water consumed in processes",
+        "Check for measurement period misalignment",
+        "Review water balance calculations"
+      ]
+    },
+    "renewable_total_energy": {
+      "rule_name": "renewable_energy_subset",
+      "description": "Renewable energy cannot exceed total energy consumption",
+      "indicator": "Renewable energy validation",
+      "validation_type": "cross_field",
+      "parameters": {
+        "fields": [
+          "renewable_energy",
+          "total_energy"
+        ],
+        "relationship": "subset",
+        "tolerance": 0.0
+      },
+      "severity": "error",
+      "citation": "RE100 Technical Criteria",
+      "error_message": "Renewable energy exceeds total energy consumption.",
+      "suggested_fixes": [
+        "Verify renewable energy calculations",
+        "Check for double-counting of RECs",
+        "Ensure consistent units between renewable and total energy",
+        "Review total energy to include all sources"
+      ]
+    }
+  }
+}

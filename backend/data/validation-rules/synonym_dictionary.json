@@ -1,0 +1,482 @@
+{
+  "standard_indicators": {
+    "total_electricity": {
+      "canonical_name": "Total Electricity Consumption",
+      "unit": "MWh",
+      "category": "energy",
+      "synonyms": [
+        "electricity consumption",
+        "power usage",
+        "energy - electrical",
+        "elec consumption",
+        "electricity used",
+        "power consumed",
+        "electrical energy",
+        "electric power",
+        "electricity kwh"
+      ],
+      "fuzzy_threshold": 0.85
+    },
+    "natural_gas": {
+      "canonical_name": "Natural Gas Consumption",
+      "unit": "m³",
+      "category": "energy",
+      "synonyms": [
+        "gas consumption",
+        "natural gas used",
+        "fuel gas",
+        "ng consumption",
+        "gas usage",
+        "natural gas m3",
+        "methane consumption"
+      ],
+      "fuzzy_threshold": 0.85
+    },
+    "fuel_oil": {
+      "canonical_name": "Fuel Oil Consumption",
+      "unit": "liters",
+      "category": "energy",
+      "synonyms": [
+        "diesel consumption",
+        "fuel consumption",
+        "oil usage",
+        "liquid fuel",
+        "diesel fuel",
+        "heating oil",
+        "heavy fuel oil"
+      ],
+      "fuzzy_threshold": 0.85
+    },
+    "renewable_energy": {
+      "canonical_name": "Renewable Energy Generation",
+      "unit": "MWh",
+      "category": "energy",
+      "synonyms": [
+        "renewable electricity",
+        "green energy",
+        "solar generation",
+        "wind generation",
+        "clean energy",
+        "renewable power",
+        "sustainable energy"
+      ],
+      "fuzzy_threshold": 0.80
+    },
+    "steam_consumption": {
+      "canonical_name": "Steam Consumption",
+      "unit": "tonnes",
+      "category": "energy",
+      "synonyms": [
+        "steam used",
+        "process steam",
+        "steam energy",
+        "thermal energy",
+        "steam usage"
+      ],
+      "fuzzy_threshold": 0.85
+    },
+    "scope_1_emissions": {
+      "canonical_name": "Scope 1 GHG Emissions",
+      "unit": "tonnes CO₂e",
+      "category": "emissions",
+      "synonyms": [
+        "direct emissions",
+        "scope 1",
+        "ghg scope 1",
+        "carbon dioxide emissions",
+        "co2 emissions",
+        "emissions - direct",
+        "scope 1 co2",
+        "direct ghg",
+        "stationary combustion"
+      ],
+      "fuzzy_threshold": 0.85
+    },
+    "scope_2_emissions": {
+      "canonical_name": "Scope 2 GHG Emissions",
+      "unit": "tonnes CO₂e",
+      "category": "emissions",
+      "synonyms": [
+        "indirect emissions",
+        "scope 2",
+        "ghg scope 2",
+        "purchased electricity emissions",
+        "scope 2 co2",
+        "indirect ghg",
+        "electricity emissions"
+      ],
+      "fuzzy_threshold": 0.85
+    },
+    "scope_3_emissions": {
+      "canonical_name": "Scope 3 GHG Emissions",
+      "unit": "tonnes CO₂e",
+      "category": "emissions",
+      "synonyms": [
+        "value chain emissions",
+        "scope 3",
+        "ghg scope 3",
+        "supply chain emissions",
+        "scope 3 co2",
+        "upstream emissions",
+        "downstream emissions"
+      ],
+      "fuzzy_threshold": 0.85
+    },
+    "co2_emissions": {
+      "canonical_name": "Carbon Dioxide Emissions",
+      "unit": "tonnes CO₂",
+      "category": "emissions",
+      "synonyms": [
+        "co2",
+        "carbon dioxide",
+        "co2 emitted",
+        "carbon emissions",
+        "co2e",
+        "carbon output"
+      ],
+      "fuzzy_threshold": 0.90
+    },
+    "ch4_emissions": {
+      "canonical_name": "Methane Emissions",
+      "unit": "tonnes CH₄",
+      "category": "emissions",
+      "synonyms": [
+        "ch4",
+        "methane",
+        "ch4 emissions",
+        "methane released",
+        "fugitive methane"
+      ],
+      "fuzzy_threshold": 0.90
+    },
+    "n2o_emissions": {
+      "canonical_name": "Nitrous Oxide Emissions",
+      "unit": "tonnes N₂O",
+      "category": "emissions",
+      "synonyms": [
+        "n2o",
+        "nitrous oxide",
+        "n2o emissions",
+        "laughing gas"
+      ],
+      "fuzzy_threshold": 0.90
+    },
+    "nox_emissions": {
+      "canonical_name": "Nitrogen Oxides Emissions",
+      "unit": "kg NOx",
+      "category": "emissions",
+      "synonyms": [
+        "nox",
+        "nitrogen oxides",
+        "nox emissions",
+        "no2 emissions",
+        "nitrogen dioxide"
+      ],
+      "fuzzy_threshold": 0.90
+    },
+    "sox_emissions": {
+      "canonical_name": "Sulfur Oxides Emissions",
+      "unit": "kg SOx",
+      "category": "emissions",
+      "synonyms": [
+        "sox",
+        "sulfur oxides",
+        "sox emissions",
+        "so2 emissions",
+        "sulfur dioxide",
+        "sulphur oxides"
+      ],
+      "fuzzy_threshold": 0.90
+    },
+    "water_consumption": {
+      "canonical_name": "Total Water Consumption",
+      "unit": "m³",
+      "category": "water",
+      "synonyms": [
+        "water used",
+        "water usage",
+        "water intake",
+        "water withdrawal",
+        "water consumed",
+        "total water",
+        "water m3"
+      ],
+      "fuzzy_threshold": 0.85
+    },
+    "water_discharge": {
+      "canonical_name": "Water Discharge",
+      "unit": "m³",
+      "category": "water",
+      "synonyms": [
+        "wastewater",
+        "water discharged",
+        "effluent",
+        "water released",
+        "discharge water",
+        "wastewater discharge"
+      ],
+      "fuzzy_threshold": 0.85
+    },
+    "water_recycled": {
+      "canonical_name": "Water Recycled/Reused",
+      "unit": "m³",
+      "category": "water",
+      "synonyms": [
+        "recycled water",
+        "water reused",
+        "water recycling",
+        "reused water",
+        "water recirculated",
+        "reclaimed water"
+      ],
+      "fuzzy_threshold": 0.85
+    },
+    "hazardous_waste": {
+      "canonical_name": "Hazardous Waste Generated",
+      "unit": "tonnes",
+      "category": "waste",
+      "synonyms": [
+        "hazardous waste",
+        "toxic waste",
+        "dangerous waste",
+        "special waste",
+        "regulated waste",
+        "haz waste"
+      ],
+      "fuzzy_threshold": 0.85
+    },
+    "non_hazardous_waste": {
+      "canonical_name": "Non-Hazardous Waste Generated",
+      "unit": "tonnes",
+      "category": "waste",
+      "synonyms": [
+        "non-hazardous waste",
+        "general waste",
+        "solid waste",
+        "municipal waste",
+        "non-haz waste",
+        "regular waste"
+      ],
+      "fuzzy_threshold": 0.85
+    },
+    "waste_recycled": {
+      "canonical_name": "Waste Recycled",
+      "unit": "tonnes",
+      "category": "waste",
+      "synonyms": [
+        "recycled waste",
+        "waste diverted",
+        "waste recovered",
+        "recycling",
+        "waste reused",
+        "diverted from landfill"
+      ],
+      "fuzzy_threshold": 0.85
+    },
+    "waste_landfill": {
+      "canonical_name": "Waste to Landfill",
+      "unit": "tonnes",
+      "category": "waste",
+      "synonyms": [
+        "landfill waste",
+        "waste disposed",
+        "landfilled waste",
+        "waste to disposal",
+        "disposed waste"
+      ],
+      "fuzzy_threshold": 0.85
+    },
+    "production_output": {
+      "canonical_name": "Production Output",
+      "unit": "tonnes",
+      "category": "production",
+      "synonyms": [
+        "production",
+        "output",
+        "production volume",
+        "manufactured",
+        "produced",
+        "total production",
+        "production tonnes"
+      ],
+      "fuzzy_threshold": 0.85
+    },
+    "capacity_utilization": {
+      "canonical_name": "Capacity Utilization",
+      "unit": "%",
+      "category": "production",
+      "synonyms": [
+        "utilization rate",
+        "capacity rate",
+        "plant utilization",
+        "operating rate",
+        "capacity factor"
+      ],
+      "fuzzy_threshold": 0.85
+    },
+    "employees_total": {
+      "canonical_name": "Total Employees",
+      "unit": "count",
+      "category": "social",
+      "synonyms": [
+        "workforce",
+        "headcount",
+        "employees",
+        "staff",
+        "personnel",
+        "workers",
+        "employee count"
+      ],
+      "fuzzy_threshold": 0.85
+    },
+    "safety_incidents": {
+      "canonical_name": "Safety Incidents",
+      "unit": "count",
+      "category": "social",
+      "synonyms": [
+        "accidents",
+        "incidents",
+        "safety events",
+        "workplace accidents",
+        "injuries",
+        "recordable incidents",
+        "lost time injuries"
+      ],
+      "fuzzy_threshold": 0.85
+    },
+    "lost_time_injury_rate": {
+      "canonical_name": "Lost Time Injury Frequency Rate",
+      "unit": "per million hours",
+      "category": "social",
+      "synonyms": [
+        "ltifr",
+        "lti rate",
+        "injury rate",
+        "lost time frequency",
+        "accident frequency rate"
+      ],
+      "fuzzy_threshold": 0.85
+    },
+    "training_hours": {
+      "canonical_name": "Employee Training Hours",
+      "unit": "hours",
+      "category": "social",
+      "synonyms": [
+        "training",
+        "training time",
+        "employee development",
+        "learning hours",
+        "training provided"
+      ],
+      "fuzzy_threshold": 0.85
+    },
+    "energy_intensity": {
+      "canonical_name": "Energy Intensity",
+      "unit": "MWh/tonne",
+      "category": "intensity",
+      "synonyms": [
+        "specific energy consumption",
+        "energy per unit",
+        "energy efficiency",
+        "unit energy consumption",
+        "energy per tonne"
+      ],
+      "fuzzy_threshold": 0.80
+    },
+    "carbon_intensity": {
+      "canonical_name": "Carbon Intensity",
+      "unit": "kg CO₂e/tonne",
+      "category": "intensity",
+      "synonyms": [
+        "emissions intensity",
+        "co2 intensity",
+        "carbon per unit",
+        "specific emissions",
+        "emissions per tonne",
+        "co2 per tonne"
+      ],
+      "fuzzy_threshold": 0.80
+    },
+    "water_intensity": {
+      "canonical_name": "Water Intensity",
+      "unit": "m³/tonne",
+      "category": "intensity",
+      "synonyms": [
+        "specific water consumption",
+        "water per unit",
+        "water efficiency",
+        "water per tonne",
+        "unit water consumption"
+      ],
+      "fuzzy_threshold": 0.80
+    },
+    "renewable_percentage": {
+      "canonical_name": "Renewable Energy Percentage",
+      "unit": "%",
+      "category": "energy",
+      "synonyms": [
+        "renewable share",
+        "green energy percentage",
+        "renewable ratio",
+        "clean energy share",
+        "renewable energy mix"
+      ],
+      "fuzzy_threshold": 0.80
+    },
+    "waste_diversion_rate": {
+      "canonical_name": "Waste Diversion Rate",
+      "unit": "%",
+      "category": "waste",
+      "synonyms": [
+        "recycling rate",
+        "waste recovery rate",
+        "diversion percentage",
+        "waste recycled percentage",
+        "landfill diversion"
+      ],
+      "fuzzy_threshold": 0.80
+    },
+    "voc_emissions": {
+      "canonical_name": "Volatile Organic Compounds Emissions",
+      "unit": "kg VOC",
+      "category": "emissions",
+      "synonyms": [
+        "voc",
+        "volatile organic compounds",
+        "voc emissions",
+        "organic emissions",
+        "volatile compounds"
+      ],
+      "fuzzy_threshold": 0.90
+    },
+    "particulate_matter": {
+      "canonical_name": "Particulate Matter Emissions",
+      "unit": "kg PM",
+      "category": "emissions",
+      "synonyms": [
+        "pm emissions",
+        "particulates",
+        "dust emissions",
+        "pm10",
+        "pm2.5",
+        "particle emissions"
+      ],
+      "fuzzy_threshold": 0.85
+    }
+  },
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2025-01-15",
+    "total_indicators": 33,
+    "categories": [
+      "energy",
+      "emissions",
+      "water",
+      "waste",
+      "production",
+      "social",
+      "intensity"
+    ],
+    "description": "Standard ESG indicator synonym dictionary for entity matching"
+  }
+}

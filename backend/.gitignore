@@ -1,0 +1,96 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+myenv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.env.local
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+.tox/
+
+# Database
+*.db
+*.sqlite3
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Uploads (runtime data only)
+data/uploads/*
+!data/uploads/.gitkeep
+
+# Temporary files
+*.tmp
+*.bak
+*~.nib
+
+# Docker
+docker-installer-error-*.log
+poetry-installer-error-*.log
+
+# Documentation (analysis files only - keep essential docs)
+docs/FILE_ANALYSIS.md
+
+# Generated test data (can be regenerated with scripts/generate_test_data.py)
+data/sample-inputs/*.xlsx
+data/sample-inputs/*.csv
+!data/sample-inputs/.gitkeep
+
+# Alembic (removed - using SQLAlchemy create_all)
+alembic/
+
+# ML Model cache (large binary files - auto-downloaded on first run)
+.model_cache/
+
+# Qdrant vector database storage (runtime data)
+data/qdrant_storage/
+
+# Provenance graph (runtime generated)
+data/provenance.ttl
+
+# Generated report outputs
+data/outputs/
+
+# DOCX templates (add manually if needed)
+data/templates/

@@ -1,0 +1,92 @@
+{
+  "E1": {
+    "name": "Total Electricity Consumption",
+    "definition": "Total electricity from grid and captive power",
+    "unit": "MWh",
+    "calculation": "Grid electricity + captive generation - sold"
+  },
+  "E2": {
+    "name": "Total Fuel Consumption",
+    "definition": "Energy from all fuel sources consumed on-site",
+    "unit": "TJ",
+    "calculation": "Coal + natural gas + diesel + other fuels"
+  },
+  "E3": {
+    "name": "Total Energy Consumption",
+    "definition": "Sum of all energy sources consumed",
+    "unit": "TJ",
+    "calculation": "Electricity + fuel + steam + cooling + heating"
+  },
+  "E4": {
+    "name": "Energy Intensity",
+    "definition": "Energy consumed per unit of revenue or production",
+    "unit": "GJ/tonne or GJ/₹Cr",
+    "calculation": "Total energy consumption / production or revenue"
+  },
+  "E5": {
+    "name": "Renewable Energy Share",
+    "definition": "Fraction of total energy from renewable sources",
+    "unit": "%",
+    "calculation": "(Solar + wind + biomass) / total energy × 100"
+  },
+  "E6": {
+    "name": "Scope 1 GHG Emissions",
+    "definition": "Direct emissions from owned sources",
+    "unit": "tonnes CO₂e",
+    "calculation": "Stationary + mobile + process + fugitive emissions"
+  },
+  "E7": {
+    "name": "Scope 2 GHG Emissions",
+    "definition": "Indirect emissions from purchased electricity",
+    "unit": "tonnes CO₂e",
+    "calculation": "Electricity (MWh) × emission factor"
+  },
+  "E8": {
+    "name": "Total GHG Emissions",
+    "definition": "Combined Scope 1 and Scope 2 emissions",
+    "unit": "tonnes CO₂e",
+    "calculation": "Scope 1 + Scope 2 emissions"
+  },
+  "W1": {
+    "name": "Total Water Consumption",
+    "definition": "Water withdrawn from all sources",
+    "unit": "m³",
+    "calculation": "Surface + groundwater + municipal + recycled"
+  },
+  "W2": {
+    "name": "Water Intensity",
+    "definition": "Water consumed per unit of revenue or production",
+    "unit": "m³/tonne or m³/₹Cr",
+    "calculation": "Total water consumption / production or revenue"
+  },
+  "W3": {
+    "name": "Water Recycled and Reused",
+    "definition": "Volume of water recycled or reused on-site",
+    "unit": "m³",
+    "calculation": "Treated wastewater reused + rainwater harvested"
+  },
+  "W4": {
+    "name": "Water Discharge",
+    "definition": "Total wastewater discharged to external bodies",
+    "unit": "m³",
+    "calculation": "Total withdrawal - consumption - recycled"
+  },
+  "WS1": {
+    "name": "Total Waste Generated",
+    "definition": "Hazardous and non-hazardous waste produced",
+    "unit": "tonnes",
+    "calculation": "Hazardous waste + non-hazardous waste"
+  },
+  "WS2": {
+    "name": "Waste Diverted from Disposal",
+    "definition": "Waste recycled, reused, or recovered",
+    "unit": "tonnes",
+    "calculation": "Recycled + composted + co-processed + reused"
+  },
+  "WS3": {
+    "name": "Waste Directed to Disposal",
+    "definition": "Waste sent to landfill or incineration",
+    "unit": "tonnes",
+    "calculation": "Landfilled + incinerated (with/without energy recovery)"
+  }
+}

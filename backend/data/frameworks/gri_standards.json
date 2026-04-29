@@ -1,0 +1,122 @@
+{
+  "302-1": {
+    "name": "Energy consumption within the organization",
+    "definition": "Total fuel and electricity consumption",
+    "unit": "GJ",
+    "calculation": "Fuel + electricity + heating + cooling in gigajoules"
+  },
+  "302-2": {
+    "name": "Energy consumption outside the organization",
+    "definition": "Upstream and downstream energy use in value chain",
+    "unit": "GJ",
+    "calculation": "Transport + distribution + product use energy"
+  },
+  "302-3": {
+    "name": "Energy intensity",
+    "definition": "Energy per unit of activity or output",
+    "unit": "GJ/unit",
+    "calculation": "Total energy / revenue or production volume"
+  },
+  "302-4": {
+    "name": "Reduction of energy consumption",
+    "definition": "Energy saved through efficiency and conservation initiatives",
+    "unit": "GJ",
+    "calculation": "Baseline energy - current energy after initiatives"
+  },
+  "302-5": {
+    "name": "Reduction in energy requirements of products",
+    "definition": "Energy reductions achieved in sold products and services",
+    "unit": "GJ",
+    "calculation": "Previous product energy - current product energy"
+  },
+  "305-1": {
+    "name": "Direct (Scope 1) GHG emissions",
+    "definition": "Gross direct GHG emissions in metric tons CO2e",
+    "unit": "tonnes CO₂e",
+    "calculation": "Direct emissions from owned or controlled sources"
+  },
+  "305-2": {
+    "name": "Energy indirect (Scope 2) GHG emissions",
+    "definition": "Gross location-based Scope 2 emissions",
+    "unit": "tonnes CO₂e",
+    "calculation": "Purchased electricity × grid emission factor"
+  },
+  "305-3": {
+    "name": "Other indirect (Scope 3) GHG emissions",
+    "definition": "All other indirect emissions across value chain",
+    "unit": "tonnes CO₂e",
+    "calculation": "Sum of all 15 Scope 3 categories"
+  },
+  "305-4": {
+    "name": "GHG emissions intensity",
+    "definition": "GHG emissions per unit of activity or output",
+    "unit": "tonnes CO₂e/unit",
+    "calculation": "Total GHG / revenue or production volume"
+  },
+  "305-5": {
+    "name": "Reduction of GHG emissions",
+    "definition": "Emissions reduced through mitigation initiatives",
+    "unit": "tonnes CO₂e",
+    "calculation": "Baseline emissions - current emissions after initiatives"
+  },
+  "303-1": {
+    "name": "Interactions with water as a shared resource",
+    "definition": "Description of water-related impacts and management approach",
+    "unit": "qualitative",
+    "calculation": "Narrative on water risks, policies, and stakeholders"
+  },
+  "303-2": {
+    "name": "Management of water discharge-related impacts",
+    "definition": "Standards and approach for managing water discharge",
+    "unit": "qualitative",
+    "calculation": "Discharge quality standards and treatment methods"
+  },
+  "303-3": {
+    "name": "Water withdrawal",
+    "definition": "Total water withdrawn by source",
+    "unit": "m³",
+    "calculation": "All sources including surface, ground, municipal"
+  },
+  "303-4": {
+    "name": "Water discharge",
+    "definition": "Total water discharged by destination and quality",
+    "unit": "m³",
+    "calculation": "Discharge to surface water + groundwater + third party"
+  },
+  "303-5": {
+    "name": "Water consumption",
+    "definition": "Total water consumed across all operations",
+    "unit": "m³",
+    "calculation": "Withdrawal - discharge = consumption"
+  },
+  "306-1": {
+    "name": "Waste generation and significant waste-related impacts",
+    "definition": "Total waste generated and key waste-related impacts",
+    "unit": "tonnes",
+    "calculation": "Hazardous + non-hazardous waste produced"
+  },
+  "306-2": {
+    "name": "Management of significant waste-related impacts",
+    "definition": "Actions taken to prevent and manage waste",
+    "unit": "qualitative",
+    "calculation": "Circular economy and waste reduction initiatives"
+  },
+  "306-3": {
+    "name": "Waste generated",
+    "definition": "Total weight of hazardous and non-hazardous waste",
+    "unit": "tonnes",
+    "calculation": "On-site + off-site waste by composition"
+  },
+  "306-4": {
+    "name": "Waste diverted from disposal",
+    "definition": "Waste recovered through recycling, reuse, or composting",
+    "unit": "tonnes",
+    "calculation": "Recycled + reused + composted + other recovery"
+  },
+  "306-5": {
+    "name": "Waste directed to disposal",
+    "definition": "Waste sent to landfill, incineration, or deep-well",
+    "unit": "tonnes",
+    "calculation": "Landfill + incineration + other disposal methods"
+  }
+}

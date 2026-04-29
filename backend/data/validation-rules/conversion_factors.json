@@ -1,0 +1,382 @@
+{
+  "energy": {
+    "base_unit": "MWh",
+    "conversions": {
+      "kWh": {
+        "factor": 0.001,
+        "source": "SI standard",
+        "formula": "kWh * 0.001 = MWh"
+      },
+      "GWh": {
+        "factor": 1000.0,
+        "source": "SI standard",
+        "formula": "GWh * 1000 = MWh"
+      },
+      "GJ": {
+        "factor": 0.277778,
+        "source": "NIST SP 1038",
+        "formula": "GJ * 0.277778 = MWh"
+      },
+      "MJ": {
+        "factor": 0.000277778,
+        "source": "NIST SP 1038",
+        "formula": "MJ * 0.000277778 = MWh"
+      },
+      "TJ": {
+        "factor": 277.778,
+        "source": "NIST SP 1038",
+        "formula": "TJ * 277.778 = MWh"
+      },
+      "BTU": {
+        "factor": 0.00000029307107,
+        "source": "EPA guidelines",
+        "formula": "BTU * 0.00000029307107 = MWh"
+      },
+      "MMBTU": {
+        "factor": 0.293071,
+        "source": "EPA guidelines",
+        "formula": "MMBTU * 0.293071 = MWh"
+      },
+      "therm": {
+        "factor": 0.0293071,
+        "source": "EPA guidelines",
+        "formula": "therm * 0.0293071 = MWh"
+      },
+      "kcal": {
+        "factor": 0.000001163,
+        "source": "ISO 31-4",
+        "formula": "kcal * 0.000001163 = MWh"
+      },
+      "Mcal": {
+        "factor": 0.001163,
+        "source": "ISO 31-4",
+        "formula": "Mcal * 0.001163 = MWh"
+      },
+      "kJ": {
+        "factor": 0.000000277778,
+        "source": "SI standard",
+        "formula": "kJ * 0.000000277778 = MWh"
+      },
+      "Wh": {
+        "factor": 0.000001,
+        "source": "SI standard",
+        "formula": "Wh * 0.000001 = MWh"
+      }
+    }
+  },
+  "mass": {
+    "base_unit": "tonnes",
+    "conversions": {
+      "kg": {
+        "factor": 0.001,
+        "source": "SI standard",
+        "formula": "kg * 0.001 = tonnes"
+      },
+      "g": {
+        "factor": 0.000001,
+        "source": "SI standard",
+        "formula": "g * 0.000001 = tonnes"
+      },
+      "mg": {
+        "factor": 0.000000001,
+        "source": "SI standard",
+        "formula": "mg * 0.000000001 = tonnes"
+      },
+      "pounds": {
+        "factor": 0.000453592,
+        "source": "NIST Handbook 44",
+        "formula": "pounds * 0.000453592 = tonnes"
+      },
+      "lbs": {
+        "factor": 0.000453592,
+        "source": "NIST Handbook 44",
+        "formula": "lbs * 0.000453592 = tonnes"
+      },
+      "short_tons": {
+        "factor": 0.907185,
+        "source": "NIST Handbook 44",
+        "formula": "short_tons * 0.907185 = tonnes"
+      },
+      "long_tons": {
+        "factor": 1.01605,
+        "source": "NIST Handbook 44",
+        "formula": "long_tons * 1.01605 = tonnes"
+      },
+      "metric_tons": {
+        "factor": 1.0,
+        "source": "SI standard",
+        "formula": "metric_tons * 1.0 = tonnes"
+      },
+      "ounces": {
+        "factor": 0.0000283495,
+        "source": "NIST Handbook 44",
+        "formula": "ounces * 0.0000283495 = tonnes"
+      }
+    }
+  },
+  "volume": {
+    "base_unit": "m3",
+    "conversions": {
+      "liters": {
+        "factor": 0.001,
+        "source": "SI standard",
+        "formula": "liters * 0.001 = m3"
+      },
+      "L": {
+        "factor": 0.001,
+        "source": "SI standard",
+        "formula": "L * 0.001 = m3"
+      },
+      "mL": {
+        "factor": 0.000001,
+        "source": "SI standard",
+        "formula": "mL * 0.000001 = m3"
+      },
+      "gallons": {
+        "factor": 0.00378541,
+        "source": "NIST Handbook 44",
+        "formula": "gallons * 0.00378541 = m3"
+      },
+      "cubic_feet": {
+        "factor": 0.0283168,
+        "source": "NIST SP 811",
+        "formula": "cubic_feet * 0.0283168 = m3"
+      },
+      "cubic_inches": {
+        "factor": 0.0000163871,
+        "source": "NIST SP 811",
+        "formula": "cubic_inches * 0.0000163871 = m3"
+      },
+      "barrels": {
+        "factor": 0.158987,
+        "source": "API standards",
+        "formula": "barrels * 0.158987 = m3"
+      }
+    }
+  },
+  "emissions": {
+    "base_unit": "tonnes CO2e",
+    "conversions": {
+      "kg CO2e": {
+        "factor": 0.001,
+        "source": "GHG Protocol",
+        "formula": "kg CO2e * 0.001 = tonnes CO2e"
+      },
+      "g CO2e": {
+        "factor": 0.000001,
+        "source": "GHG Protocol",
+        "formula": "g CO2e * 0.000001 = tonnes CO2e"
+      },
+      "pounds CO2e": {
+        "factor": 0.000453592,
+        "source": "EPA GHG Inventory",
+        "formula": "pounds CO2e * 0.000453592 = tonnes CO2e"
+      },
+      "metric tons CO2e": {
+        "factor": 1.0,
+        "source": "GHG Protocol",
+        "formula": "metric tons CO2e * 1.0 = tonnes CO2e"
+      },
+      "short tons CO2e": {
+        "factor": 0.907185,
+        "source": "EPA GHG Inventory",
+        "formula": "short tons CO2e * 0.907185 = tonnes CO2e"
+      },
+      "Mt CO2e": {
+        "factor": 1000000.0,
+        "source": "IPCC guidelines",
+        "formula": "Mt CO2e * 1000000 = tonnes CO2e"
+      }
+    }
+  },
+  "area": {
+    "base_unit": "m2",
+    "conversions": {
+      "km2": {
+        "factor": 1000000.0,
+        "source": "SI standard",
+        "formula": "km2 * 1000000 = m2"
+      },
+      "hectares": {
+        "factor": 10000.0,
+        "source": "SI standard",
+        "formula": "hectares * 10000 = m2"
+      },
+      "acres": {
+        "factor": 4046.86,
+        "source": "NIST Handbook 44",
+        "formula": "acres * 4046.86 = m2"
+      },
+      "square_feet": {
+        "factor": 0.092903,
+        "source": "NIST SP 811",
+        "formula": "square_feet * 0.092903 = m2"
+      }
+    }
+  },
+  "temperature": {
+    "base_unit": "degC",
+    "conversions": {
+      "degF": {
+        "factor": null,
+        "source": "NIST SP 811",
+        "formula": "(degF - 32) * 5/9 = degC"
+      },
+      "K": {
+        "factor": null,
+        "source": "SI standard",
+        "formula": "K - 273.15 = degC"
+      }
+    }
+  },
+  "power": {
+    "base_unit": "MW",
+    "conversions": {
+      "kW": {
+        "factor": 0.001,
+        "source": "SI standard",
+        "formula": "kW * 0.001 = MW"
+      },
+      "W": {
+        "factor": 0.000001,
+        "source": "SI standard",
+        "formula": "W * 0.000001 = MW"
+      },
+      "GW": {
+        "factor": 1000.0,
+        "source": "SI standard",
+        "formula": "GW * 1000 = MW"
+      },
+      "hp": {
+        "factor": 0.000745699,
+        "source": "NIST SP 811",
+        "formula": "hp * 0.000745699 = MW"
+      }
+    }
+  },
+  "pressure": {
+    "base_unit": "bar",
+    "conversions": {
+      "Pa": {
+        "factor": 0.00001,
+        "source": "SI standard",
+        "formula": "Pa * 0.00001 = bar"
+      },
+      "kPa": {
+        "factor": 0.01,
+        "source": "SI standard",
+        "formula": "kPa * 0.01 = bar"
+      },
+      "MPa": {
+        "factor": 10.0,
+        "source": "SI standard",
+        "formula": "MPa * 10 = bar"
+      },
+      "psi": {
+        "factor": 0.0689476,
+        "source": "NIST SP 811",
+        "formula": "psi * 0.0689476 = bar"
+      },
+      "atm": {
+        "factor": 1.01325,
+        "source": "NIST SP 811",
+        "formula": "atm * 1.01325 = bar"
+      }
+    }
+  },
+  "compound_energy_intensity": {
+    "base_unit": "MWh/tonne",
+    "conversions": {
+      "kWh/kg": {
+        "factor": 1.0,
+        "source": "Derived from SI",
+        "formula": "kWh/kg * 1.0 = MWh/tonne"
+      },
+      "GJ/tonne": {
+        "factor": 0.277778,
+        "source": "Derived from NIST",
+        "formula": "GJ/tonne * 0.277778 = MWh/tonne"
+      },
+      "MJ/kg": {
+        "factor": 0.277778,
+        "source": "Derived from NIST",
+        "formula": "MJ/kg * 0.277778 = MWh/tonne"
+      },
+      "BTU/lb": {
+        "factor": 0.000646,
+        "source": "Derived from EPA",
+        "formula": "BTU/lb * 0.000646 = MWh/tonne"
+      },
+      "kWh/tonne": {
+        "factor": 0.001,
+        "source": "Derived from SI",
+        "formula": "kWh/tonne * 0.001 = MWh/tonne"
+      }
+    }
+  },
+  "compound_emission_intensity": {
+    "base_unit": "kg CO2e/MWh",
+    "conversions": {
+      "tonnes CO2e/MWh": {
+        "factor": 1000.0,
+        "source": "Derived from GHG Protocol",
+        "formula": "tonnes CO2e/MWh * 1000 = kg CO2e/MWh"
+      },
+      "g CO2e/kWh": {
+        "factor": 1.0,
+        "source": "Derived from GHG Protocol",
+        "formula": "g CO2e/kWh * 1.0 = kg CO2e/MWh"
+      },
+      "kg CO2e/GJ": {
+        "factor": 3.6,
+        "source": "Derived from IPCC",
+        "formula": "kg CO2e/GJ * 3.6 = kg CO2e/MWh"
+      },
+      "pounds CO2e/MMBTU": {
+        "factor": 1.547,
+        "source": "Derived from EPA",
+        "formula": "pounds CO2e/MMBTU * 1.547 = kg CO2e/MWh"
+      }
+    }
+  },
+  "compound_water_intensity": {
+    "base_unit": "m3/tonne",
+    "conversions": {
+      "L/kg": {
+        "factor": 1.0,
+        "source": "Derived from SI",
+        "formula": "L/kg * 1.0 = m3/tonne"
+      },
+      "gallons/ton": {
+        "factor": 0.00417267,
+        "source": "Derived from NIST",
+        "formula": "gallons/ton * 0.00417267 = m3/tonne"
+      },
+      "m3/kg": {
+        "factor": 1000.0,
+        "source": "Derived from SI",
+        "formula": "m3/kg * 1000 = m3/tonne"
+      }
+    }
+  },
+  "compound_waste_intensity": {
+    "base_unit": "kg/tonne",
+    "conversions": {
+      "tonnes/tonne": {
+        "factor": 1000.0,
+        "source": "Derived from SI",
+        "formula": "tonnes/tonne * 1000 = kg/tonne"
+      },
+      "g/kg": {
+        "factor": 1.0,
+        "source": "Derived from SI",
+        "formula": "g/kg * 1.0 = kg/tonne"
+      },
+      "pounds/ton": {
+        "factor": 0.5,
+        "source": "Derived from NIST",
+        "formula": "pounds/ton * 0.5 = kg/tonne"
+      }
+    }
+  }
+}
