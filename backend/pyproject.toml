@@ -21,7 +21,11 @@ polars = "^1.0.0"
 pandas = "^2.2.0"
 openpyxl = "^3.1.0"
 xlrd = "^2.0.1"
-unstructured = {extras = ["pdf"], version = "^0.15.0"}
+
+#unstructured = {extras = ["pdf"], version = "^0.15.0"}
+pypdf2 = "^3.0.0"
+pdfplumber = "^0.11.0"
+
 chardet = "^5.2.0"
 rapidfuzz = "^3.10.0"
 # Database
@@ -30,8 +34,11 @@ psycopg2-binary = "^2.9.0"
 redis = "^5.0.0"
 # AI/ML
 anthropic = "^0.40.0"
-langchain = "^0.3.0"
-sentence-transformers = "^3.0.0"
+#langchain = "^0.3.0"
+
+#sentence-transformers = "^3.0.0"
+openai = "^1.0.0"
+
 qdrant-client = "^1.11.0"
 # Report Export
 python-docx = "^1.1.0"
