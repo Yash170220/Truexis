@@ -4,6 +4,7 @@ import uuid
 from typing import Dict, List, Optional
 from uuid import UUID
 
+import anthropic
 from qdrant_client import QdrantClient
 from qdrant_client.http.models import (
     Distance,
@@ -13,14 +14,29 @@ from qdrant_client.http.models import (
     PointStruct,
     VectorParams,
 )
-from sentence_transformers import SentenceTransformer
 
 logger = logging.getLogger(__name__)
 
 VALIDATED_DATA_COLLECTION = "validated_data"
 FRAMEWORK_DEFS_COLLECTION = "framework_definitions"
-VECTOR_SIZE = 384
-BATCH_SIZE = 500
+VECTOR_SIZE = 1024  # voyage-3 embedding dimension
+VOYAGE_MODEL = "voyage-3"
+BATCH_SIZE = 128  # Voyage API input limit per request
+
+
+def _embed_texts(client: anthropic.Anthropic, texts: List[str]) -> List[List[float]]:
+    """Embed a list of texts using Anthropic Voyage-3.
+
+    Splits into BATCH_SIZE chunks to stay within API limits.
+    Returns a flat list of embedding vectors in the same order as *texts*.
+    """
+    all_embeddings: List[List[float]] = []
+    for i in range(0, len(texts), BATCH_SIZE):
+        chunk = texts[i : i + BATCH_SIZE]
+        response = client.embeddings.create(model=VOYAGE_MODEL, input=chunk)
+        # response.data is sorted by index
+        all_embeddings.extend([item.embedding for item in response.data])
+    return all_embeddings
 
 
 class VectorStore:
@@ -28,31 +44,49 @@ class VectorStore:
 
     def __init__(self, host: str = "localhost", port: int = 6333):
         self.client = QdrantClient(host=host, port=port)
-        # FIX: cache_folder avoids re-downloading model on every restart
-        self.encoder = SentenceTransformer("all-MiniLM-L6-v2", cache_folder=".model_cache")
+        self._anthropic = anthropic.Anthropic()
         self._ensure_collections()
 
+    # ------------------------------------------------------------------
+    # Collection management
+    # ------------------------------------------------------------------
+
     def _ensure_collections(self) -> None:
-        """Create collections if they don't already exist."""
-        existing = {c.name for c in self.client.get_collections().collections}
+        """Create collections if they don't already exist.
+
+        If a collection exists but was built with a different vector size
+        (e.g. the old 384-dim MiniLM model), it is deleted and recreated
+        so the size always matches VECTOR_SIZE (1024 for voyage-3).
+        """
+        existing = {c.name: c for c in self.client.get_collections().collections}
 
         for name in (VALIDATED_DATA_COLLECTION, FRAMEWORK_DEFS_COLLECTION):
-            if name not in existing:
-                self.client.create_collection(
-                    collection_name=name,
-                    vectors_config=VectorParams(
-                        size=VECTOR_SIZE, distance=Distance.COSINE
-                    ),
-                )
-                logger.info(f"Created Qdrant collection: {name}")
+            if name in existing:
+                info = self.client.get_collection(name)
+                stored_size = info.config.params.vectors.size
+                if stored_size != VECTOR_SIZE:
+                    logger.warning(
+                        "Collection '%s' has vector size %d; expected %d. "
+                        "Recreating collection.",
+                        name,
+                        stored_size,
+                        VECTOR_SIZE,
+                    )
+                    self.client.delete_collection(name)
+                else:
+                    continue  # already correct
+
+            self.client.create_collection(
+                collection_name=name,
+                vectors_config=VectorParams(size=VECTOR_SIZE, distance=Distance.COSINE),
+            )
+            logger.info("Created Qdrant collection: %s (size=%d)", name, VECTOR_SIZE)
 
     # ------------------------------------------------------------------
     # Validated data
     # ------------------------------------------------------------------
 
-    def add_validated_data(
-        self, upload_id: UUID, records: List[Dict]
-    ) -> int:
+    def add_validated_data(self, upload_id: UUID, records: List[Dict]) -> int:
         """Embed and upsert validated ESG records.
 
         Each record dict should contain:
@@ -60,10 +94,6 @@ class VectorStore:
 
         Returns the number of points upserted.
         """
-        points: List[PointStruct] = []
-
-        # FIX: Batch-encode all texts at once instead of one-by-one
-        #      encode() with a list is ~10x faster than calling it per record
         texts = [
             (
                 f"{r.get('facility', 'Unknown facility')} consumed "
@@ -72,40 +102,40 @@ class VectorStore:
             )
             for r in records
         ]
-        embeddings = self.encoder.encode(texts, batch_size=64, show_progress_bar=False)
+        embeddings = _embed_texts(self._anthropic, texts)
 
+        points: List[PointStruct] = []
         for record, text, embedding in zip(records, texts, embeddings):
-            point = PointStruct(
-                id=str(uuid.uuid4()),
-                vector=embedding.tolist(),
-                payload={
-                    "upload_id": str(upload_id),
-                    "data_id": str(record.get("data_id", "")),
-                    "indicator": record.get("indicator", ""),
-                    "value": record.get("value"),
-                    "unit": record.get("unit", ""),
-                    "period": record.get("period", ""),
-                    "facility": record.get("facility", ""),
-                    "text": text,
-                },
+            points.append(
+                PointStruct(
+                    id=str(uuid.uuid4()),
+                    vector=embedding,
+                    payload={
+                        "upload_id": str(upload_id),
+                        "data_id": str(record.get("data_id", "")),
+                        "indicator": record.get("indicator", ""),
+                        "value": record.get("value"),
+                        "unit": record.get("unit", ""),
+                        "period": record.get("period", ""),
+                        "facility": record.get("facility", ""),
+                        "text": text,
+                    },
+                )
             )
-            points.append(point)
 
-            if len(points) >= BATCH_SIZE:
+            if len(points) >= 500:
                 self.client.upsert(
                     collection_name=VALIDATED_DATA_COLLECTION, points=points
                 )
-                logger.info(f"Upserted batch of {len(points)} validated-data points")
+                logger.info("Upserted batch of %d validated-data points", len(points))
                 points = []
 
         if points:
-            self.client.upsert(
-                collection_name=VALIDATED_DATA_COLLECTION, points=points
-            )
-            logger.info(f"Upserted final batch of {len(points)} validated-data points")
+            self.client.upsert(collection_name=VALIDATED_DATA_COLLECTION, points=points)
+            logger.info("Upserted final batch of %d validated-data points", len(points))
 
         total = len(records)
-        logger.info(f"Added {total} validated-data records for upload {upload_id}")
+        logger.info("Added %d validated-data records for upload %s", total, upload_id)
         return total
 
     # ------------------------------------------------------------------
@@ -116,12 +146,8 @@ class VectorStore:
         """Embed and upsert framework/indicator definitions.
 
         Each dict should contain:
-            indicator_id, indicator_name, definition, unit, calculation,
-            framework
+            indicator_id, indicator_name, definition, unit, calculation, framework
         """
-        points: List[PointStruct] = []
-
-        # FIX: Batch-encode all definitions at once — same speedup as above
         texts = [
             (
                 f"{d.get('indicator_name', '')}: "
@@ -130,37 +156,37 @@ class VectorStore:
             )
             for d in definitions
         ]
-        embeddings = self.encoder.encode(texts, batch_size=64, show_progress_bar=False)
+        embeddings = _embed_texts(self._anthropic, texts)
 
+        points: List[PointStruct] = []
         for defn, text, embedding in zip(definitions, texts, embeddings):
-            point = PointStruct(
-                id=str(uuid.uuid4()),
-                vector=embedding.tolist(),
-                payload={
-                    "indicator_id": str(defn.get("indicator_id", "")),
-                    "indicator_name": defn.get("indicator_name", ""),
-                    "definition": defn.get("definition", ""),
-                    "unit": defn.get("unit", ""),
-                    "calculation": defn.get("calculation", ""),
-                    "framework": defn.get("framework", "BRSR"),
-                    "text": text,
-                },
+            points.append(
+                PointStruct(
+                    id=str(uuid.uuid4()),
+                    vector=embedding,
+                    payload={
+                        "indicator_id": str(defn.get("indicator_id", "")),
+                        "indicator_name": defn.get("indicator_name", ""),
+                        "definition": defn.get("definition", ""),
+                        "unit": defn.get("unit", ""),
+                        "calculation": defn.get("calculation", ""),
+                        "framework": defn.get("framework", "BRSR"),
+                        "text": text,
+                    },
+                )
             )
-            points.append(point)
 
-            if len(points) >= BATCH_SIZE:
+            if len(points) >= 500:
                 self.client.upsert(
                     collection_name=FRAMEWORK_DEFS_COLLECTION, points=points
                 )
                 points = []
 
         if points:
-            self.client.upsert(
-                collection_name=FRAMEWORK_DEFS_COLLECTION, points=points
-            )
+            self.client.upsert(collection_name=FRAMEWORK_DEFS_COLLECTION, points=points)
 
         total = len(definitions)
-        logger.info(f"Added {total} framework definitions")
+        logger.info("Added %d framework definitions", total)
         return total
 
     # ------------------------------------------------------------------
@@ -171,10 +197,10 @@ class VectorStore:
         self,
         query: str,
         upload_id: UUID,
-        top_k: int = 3,          # FIX: default changed from 5 → 3 to match RAG/chat callers
+        top_k: int = 3,
     ) -> List[Dict]:
         """Semantic search over validated data scoped to a single upload."""
-        query_vector = self.encoder.encode(query).tolist()
+        query_vector = _embed_texts(self._anthropic, [query])[0]
 
         response = self.client.query_points(
             collection_name=VALIDATED_DATA_COLLECTION,
@@ -188,7 +214,6 @@ class VectorStore:
                 ]
             ),
             limit=top_k,
-            # FIX: Added score_threshold to avoid returning near-zero similarity results
             score_threshold=0.3,
         )
 
@@ -210,10 +235,10 @@ class VectorStore:
         self,
         query: str,
         framework: str = "BRSR",
-        top_k: int = 1,          # FIX: default changed from 3 → 1; callers only need best match
+        top_k: int = 1,
     ) -> List[Dict]:
         """Semantic search over framework indicator definitions."""
-        query_vector = self.encoder.encode(query).tolist()
+        query_vector = _embed_texts(self._anthropic, [query])[0]
 
         response = self.client.query_points(
             collection_name=FRAMEWORK_DEFS_COLLECTION,
@@ -243,11 +268,11 @@ class VectorStore:
         ]
 
     # ------------------------------------------------------------------
-    # FIX: Added delete method — was missing, needed for DELETE /ingest/{upload_id}
+    # Delete
     # ------------------------------------------------------------------
 
     def delete_upload_data(self, upload_id: UUID) -> int:
-        """Delete all vectors associated with an upload_id. Returns count deleted."""
+        """Delete all vectors associated with an upload_id."""
         from qdrant_client.http.models import FilterSelector
 
         result = self.client.delete(
@@ -263,5 +288,5 @@ class VectorStore:
                 )
             ),
         )
-        logger.info(f"Deleted vectors for upload {upload_id}: {result}")
-        return 1  # Qdrant delete doesn't return count; log confirms success
+        logger.info("Deleted vectors for upload %s: %s", upload_id, result)
+        return 1
