@@ -40,7 +40,7 @@ def init_db() -> None:
             Base, Upload, MatchedIndicator, NormalizedData,
             ValidationResult, AuditLog,
         )
-        Base.metadata.create_all(bind=engine)
+        Base.metadata.create_all(bind=engine, checkfirst=True)
         logger.info("Database tables created / verified OK")
     except Exception as exc:
         logger.error(f"init_db failed: {exc}")
