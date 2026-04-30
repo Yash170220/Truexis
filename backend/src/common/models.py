@@ -76,7 +76,7 @@ class Upload(Base):
     __tablename__ = "uploads"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=True, index=True)
+    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=True)
     filename = Column(String(255), nullable=False)
     file_type = Column(Enum(FileType), nullable=False)
     upload_time = Column(DateTime, nullable=False, default=datetime.utcnow)
