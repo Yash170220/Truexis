@@ -42,16 +42,16 @@ def _embed_texts(client: anthropic.Anthropic, texts: List[str]) -> List[List[flo
 class VectorStore:
     """Qdrant-backed vector store for validated ESG data and framework definitions."""
 
-    import os
+    def __init__(self, host="localhost", port=6333):
+        import os
+        qdrant_url = os.getenv("QDRANT_URL")
+        qdrant_api_key = os.getenv("QDRANT_API_KEY")
 
-def __init__(self, host="localhost", port=6333):
-    qdrant_url = os.getenv("QDRANT_URL")
-    qdrant_api_key = os.getenv("QDRANT_API_KEY")
-    
-    if qdrant_url:
-        self.client = QdrantClient(url=qdrant_url, api_key=qdrant_api_key)
-    else:
-        self.client = QdrantClient(host=host, port=port)
+        if qdrant_url:
+            self.client = QdrantClient(url=qdrant_url, api_key=qdrant_api_key)
+        else:
+            self.client = QdrantClient(host=host, port=port)
+
         self._anthropic = anthropic.Anthropic()
         self._ensure_collections()
 
