@@ -110,7 +110,9 @@ def _load_validated_data(upload_id: UUID, db: Session) -> list[dict]:
 def _push_to_qdrant(upload_id: UUID, records: list[dict], vs: VectorStore) -> int:
     if not records:
         return 0
-    return vs.add_validated_data(upload_id, records)
+    # Limit to 500 records to stay within free tier memory limits
+    records_sample = records[:500]
+    return vs.add_validated_data(upload_id, records_sample)
 
 
 def _generate_single(

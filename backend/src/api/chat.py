@@ -76,7 +76,8 @@ def _ensure_data_in_qdrant(upload_id: UUID, db: Session, vs: VectorStore) -> int
             "facility": facility or "",
         })
 
-    return vs.add_validated_data(upload_id, records)
+    records_sample = records[:500]
+    return vs.add_validated_data(upload_id, records_sample)
 
 
 @router.post(
