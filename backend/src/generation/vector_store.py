@@ -54,39 +54,44 @@ class VectorStore:
         self._ensure_collections()
 
     def _ensure_collections(self) -> None:
-        """Create collections if they do not already exist.
-        If a collection exists with the wrong vector size it is recreated."""
-        existing = {c.name: c for c in self.client.get_collections().collections}
+    existing = {c.name: c for c in self.client.get_collections().collections}
 
-        for name in (VALIDATED_DATA_COLLECTION, FRAMEWORK_DEFS_COLLECTION):
-            if name in existing:
-                info = self.client.get_collection(name)
-                stored_size = info.config.params.vectors.size
-                if stored_size != VECTOR_SIZE:
-                    logger.warning(
-                        "Collection '%s' has vector size %d; expected %d. Recreating.",
-                        name, stored_size, VECTOR_SIZE,
-                    )
-                    self.client.delete_collection(name)
-                else:
-                    continue
+    for name in (VALIDATED_DATA_COLLECTION, FRAMEWORK_DEFS_COLLECTION):
+        if name in existing:
+            info = self.client.get_collection(name)
+            stored_size = info.config.params.vectors.size
+            if stored_size != VECTOR_SIZE:
+                logger.warning(
+                    "Collection '%s' has vector size %d; expected %d. Recreating.",
+                    name, stored_size, VECTOR_SIZE,
+                )
+                self.client.delete_collection(name)
+                existing.pop(name)
 
+        if name not in existing:
             self.client.create_collection(
                 collection_name=name,
                 vectors_config=VectorParams(size=VECTOR_SIZE, distance=Distance.COSINE),
             )
             logger.info("Created Qdrant collection: %s (size=%d)", name, VECTOR_SIZE)
-            # Create payload index for filtering
+
+        # Always ensure indexes exist (safe to call even if already created)
+        try:
             self.client.create_payload_index(
                 collection_name=name,
                 field_name="upload_id",
                 field_schema="keyword",
             )
+        except Exception:
+            pass  # Index already exists
+        try:
             self.client.create_payload_index(
                 collection_name=name,
                 field_name="framework",
                 field_schema="keyword",
             )
+        except Exception:
+            pass  # Index already exists
 
     def add_validated_data(self, upload_id: UUID, records: List[Dict]) -> int:
         """Embed and upsert validated ESG records."""
