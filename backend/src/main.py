@@ -13,6 +13,7 @@ from src.api.provenance import router as provenance_router
 from src.api.chat import router as chat_router
 from src.api.dashboard import router as dashboard_router
 from src.api.export import router as export_router
+from src.generation.vector_store import VectorStore
 
 app = FastAPI(
     title="AI ESG Reporting System",
@@ -24,6 +25,11 @@ app = FastAPI(
 @app.on_event("startup")
 def startup():
     init_db()
+    try:
+        VectorStore()
+        print("Qdrant collections initialized successfully")
+    except Exception as e:
+        print(f"Failed to initialize Qdrant collections: {e}")
 
 app.add_middleware(
     CORSMiddleware,
