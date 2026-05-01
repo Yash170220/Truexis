@@ -76,6 +76,17 @@ class VectorStore:
                 vectors_config=VectorParams(size=VECTOR_SIZE, distance=Distance.COSINE),
             )
             logger.info("Created Qdrant collection: %s (size=%d)", name, VECTOR_SIZE)
+            # Create payload index for filtering
+            self.client.create_payload_index(
+                collection_name=name,
+                field_name="upload_id",
+                field_schema="keyword",
+            )
+            self.client.create_payload_index(
+                collection_name=name,
+                field_name="framework",
+                field_schema="keyword",
+            )
 
     def add_validated_data(self, upload_id: UUID, records: List[Dict]) -> int:
         """Embed and upsert validated ESG records."""
